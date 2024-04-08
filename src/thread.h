@@ -7,6 +7,7 @@
 void loopedFunc(int secondsRunning) {
     auto startTime = std::chrono::steady_clock::now();
     auto stopTime = startTime + std::chrono::seconds(secondsRunning);
+    int frameCount {0};
     while (std::chrono::steady_clock::now() < stopTime) {
         //code here
         std::cout << "Thread läuft seit "
@@ -14,9 +15,10 @@ void loopedFunc(int secondsRunning) {
                   << " Mikrosekunden."  << std::endl;
         //std::this_thread::sleep_for(std::chrono::microseconds(2300));
         //code have to end here
-
-        auto diff = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - startTime).count()%1000000;
-        std::this_thread::sleep_for(std::chrono::microseconds(1000000 - diff));
+        auto expectedTime = startTime + frameCount * std::chrono::microseconds(1000000);
+        std::this_thread::sleep_until(expectedTime);
+//        auto diff = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - startTime).count()%1000000;
+//        std::this_thread::sleep_for(std::chrono::microseconds(1000000 - diff));
     }
 }
 

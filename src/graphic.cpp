@@ -1,32 +1,29 @@
 #include "graphic.h"
+
 	sf::RectangleShape player(sf::Vector2f(30.f, 30.f));
 
-void Game::initVar() {
-	this->window = nullptr;
-}
-
-void Game::initWin(int width , int height) {
-	this->videoMode.height = height;
-	this->videoMode.width = width;
-	this->window = new sf::RenderWindow(this->videoMode, "My Game");
-}
+//void Game::initWin(int width , int height) {
+//}
 
 Game::Game() {
 	player.setFillColor(sf::Color::Green);
 	player.setPosition(5.f, 5.f);
 	int h = 600;
 	int w = 800;
-	this->initVar();
-	this->initWin(w, h);
+	//initVar();
+	//initWin(w, h);
+	videoMode.height = h;
+	videoMode.width = w;
+	window = std::make_unique<sf::RenderWindow (videoMode, "My Game");
 }
 
-Game::~Game() {
-	delete this->window;
-}
+//Game::~Game() {
+	//delete window;
+//}
 
 
 const bool Game::running() const {
-	return this->window->isOpen();
+	return window->isOpen();
 }
 
 void move(char movement) {
@@ -53,13 +50,13 @@ void move(char movement) {
 
 
 void Game::pollEvent() {
-	while(this->window->pollEvent(this->ev)) {
-		switch(this->ev.type) {
+	while(window->pollEvent(ev)) {
+		switch(ev.type) {
 		case sf::Event::Closed:
-		    this->window->close();
+		    window->close();
 		    break;
 		default:
-		    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) this->window->close();
+		    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) window->close();
 		    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) move('U');
 		    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) move('D');
 		    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) move('L');
@@ -70,12 +67,12 @@ void Game::pollEvent() {
 }
 
 void Game::update() {
-	this->pollEvent();
+	pollEvent();
 }
 
 void Game::render() {
 
-	this->window->clear(sf::Color(30,30,30,255));
+	window->clear(sf::Color(30,30,30,255));
 
 	sf::RectangleShape shape(sf::Vector2f(40.f, 40.f));
 
@@ -85,12 +82,12 @@ void Game::render() {
 			if (color) shape.setFillColor(sf::Color(30,30,30,255));
 			else shape.setFillColor(sf::Color(50,50,50,255));
 			shape.setPosition(j,i);
-			this->window->draw(shape);
+			window->draw(shape);
 			color = !color;
 		}
 		color = !color;
 	}
-	this->window->draw(player);
-	this->window->display();
+	window->draw(player);
+	window->display();
 }
 

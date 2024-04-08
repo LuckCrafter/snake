@@ -8,7 +8,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 #include <iostream>
-
+#include <memory>
 
 class Game
 {
@@ -17,8 +17,8 @@ private:
 	sf::Event ev;
 	sf::VideoMode videoMode;
 
-	void initVar();
-	void initWin(int w, int h);
+//	void initVar();
+//	void initWin(int w, int h);
 public:
 	// Constructures and Destrocters? KP was das iss
 	Game();
