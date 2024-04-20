@@ -9,6 +9,7 @@ void loopedFunc(int secondsRunning) {
     auto stopTime = startTime + std::chrono::seconds(secondsRunning);
     int frameCount {0};
     while (std::chrono::steady_clock::now() < stopTime) {
+		frameCount++;
         //code here
         std::cout << "Thread läuft seit "
                   << std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - startTime).count()

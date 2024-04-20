@@ -10,10 +10,13 @@
 #include <iostream>
 #include <memory>
 
+enum Move {up,down,left,right};
+inline Move moving {right};
+
 class Game
 {
 private:
-	sf::RenderWindow* window;
+	std::unique_ptr <sf::RenderWindow> window;
 	sf::Event ev;
 	sf::VideoMode videoMode;
 
@@ -22,13 +25,14 @@ private:
 public:
 	// Constructures and Destrocters? KP was das iss
 	Game();
-	virtual ~Game();
+//	virtual ~Game();
 
 	const bool running() const;
 
-	void pollEvent();
+	void waitEvent();
 	void update();
 	void render();
 };
 
+void move(Move moving);
 #endif
