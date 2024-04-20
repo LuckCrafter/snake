@@ -6,6 +6,7 @@
 //}
 
 Game::Game() {
+	this->window = new sf::RenderWindow(this->videoMode, "MyGame");
 	player.setFillColor(sf::Color::Green);
 	player.setPosition(5.f, 5.f);
 	int h = 600;
@@ -14,12 +15,12 @@ Game::Game() {
 	//initWin(w, h);
 	videoMode.height = h;
 	videoMode.width = w;
-	window = std::make_unique<sf::RenderWindow (videoMode, "My Game");
+	//window = new std::make_unique<sf::RenderWindow (videoMode, "My Game");
 }
 
-//Game::~Game() {
-	//delete window;
-//}
+Game::~Game() {
+	delete window;
+}
 
 
 const bool Game::running() const {
