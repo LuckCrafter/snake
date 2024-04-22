@@ -28,11 +28,12 @@ public:
 };
 
 Game::Game() {
-	player.front().setFillColor(sf::Color::Green);
-	player.front().setPosition(5.f, 5.f);
-	fruit.setPosition(210.f, 210.f);
-	fruit.setFillColor(sf::Color::Red);
-	sf::VideoMode videoMode;
+    player.front().setFillColor(sf::Color::Green);
+    player.front().setPosition(5.f, 5.f);
+    fruit.setPosition(10.f, 10.f);
+    moveFruit();
+    fruit.setFillColor(sf::Color::Red);
+    sf::VideoMode videoMode;
 	videoMode.height = 600;
 	videoMode.width = 800;
 	window = std::make_unique<sf::RenderWindow> (videoMode, "My Game");
